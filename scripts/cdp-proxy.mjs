@@ -120,6 +120,7 @@ async function connect() {
         'Chrome 未开启远程调试端口。请用以下方式启动 Chrome：\n' +
         '  macOS: /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port=9222\n' +
         '  Linux: google-chrome --remote-debugging-port=9222\n' +
+        '  Windows: chrome.exe --remote-debugging-port=9222\n' +
         '  或在 chrome://flags 中搜索 "remote debugging" 并启用'
       );
     }
@@ -466,7 +467,7 @@ const server = http.createServer(async (req, res) => {
       res.end(JSON.stringify({ value: resp.result?.result?.value }));
     }
 
-    // GET /screenshot?target=xxx&file=/tmp/x.png - 截图
+    // GET /screenshot?target=xxx&file=./tmp/x.png - 截图
     else if (pathname === '/screenshot') {
       const sid = await ensureSession(q.target);
       const format = q.format || 'png';
